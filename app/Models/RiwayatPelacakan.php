@@ -6,17 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class RiwayatPelacakan extends Model
 {
+    protected $table = 'riwayat_pelacakan';
 
-protected $table = 'riwayat_pelacakan';
+    protected $fillable = [
+        'alumni_id',
+        'query',
+        'sumber',
+        'jabatan',
+        'instansi',
+        'lokasi',
+        'bidang',
+        'tahun',
+        'link',
+        'confidence_score'
+    ];
 
-protected $fillable = [
-
-    'alumni_id',
-    'sumber',
-    'jabatan',
-    'instansi',
-    'confidence_score'
-
-];
-
+    public function alumni()
+    {
+        return $this->belongsTo(Alumni::class);
+    }
 }

@@ -1,54 +1,67 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 use App\Models\Alumni;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\PelacakanController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
 Route::get('/', function () {
 
+    // Total alumni
     $total = Alumni::count();
 
-    $belum = Alumni::where('status_pelacakan','Belum Dilacak')->count();
+    // Status pelacakan
+    $belum = Alumni::whereRaw("LOWER(status_pelacakan) = 'belum dilacak'")->count();
 
-    $teridentifikasi = Alumni::where('status_pelacakan','Teridentifikasi')->count();
+    $teridentifikasi = Alumni::whereRaw("LOWER(status_pelacakan) = 'teridentifikasi'")->count();
 
-    $verifikasi = Alumni::where('status_pelacakan','Perlu Verifikasi')->count();
+    $verifikasi = Alumni::whereRaw("
+        LOWER(status_pelacakan) = 'perlu verifikasi'
+        OR LOWER(status_pelacakan) = 'perlu identifikasi'
+    ")->count();
 
-    $prodi = Alumni::selectRaw('prodi, count(*) as total')
-            ->groupBy('prodi')
-            ->get();
+    $tidak_ditemukan = Alumni::whereRaw("LOWER(status_pelacakan) = 'tidak ditemukan'")->count();
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Statistik Alumni per Prodi
+    |--------------------------------------------------------------------------
+    | Alumni dengan status Tidak Ditemukan tidak dihitung
+    */
+
+    $prodi = Alumni::select('prodi', DB::raw('count(*) as total'))
+        ->whereRaw("LOWER(status_pelacakan) != 'tidak ditemukan'")
+        ->groupBy('prodi')
+        ->get();
+
 
     return view('dashboard', compact(
         'total',
         'belum',
         'teridentifikasi',
         'verifikasi',
+        'tidak_ditemukan',
         'prodi'
     ));
-
 });
 
 
 /*
 |--------------------------------------------------------------------------
-| Route CRUD Alumni
+| CRUD Alumni
 |--------------------------------------------------------------------------
 */
 
-Route::resource('/alumni', AlumniController::class);
+Route::resource('alumni', AlumniController::class);
 
 
 /*
 |--------------------------------------------------------------------------
-| Route Pelacakan Alumni
+| Pelacakan Alumni
 |--------------------------------------------------------------------------
 */
 
-Route::get('/lacak/{id}', [PelacakanController::class,'lacak'])->name('alumni.lacak');
+Route::get('/lacak/{id}', [PelacakanController::class, 'lacak'])
+    ->name('alumni.lacak');

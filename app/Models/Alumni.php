@@ -17,4 +17,15 @@ class Alumni extends Model
         'instansi',
         'status_pelacakan'
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relasi ke Riwayat Pelacakan
+    |--------------------------------------------------------------------------
+    */
+
+    public function riwayatPelacakan()
+    {
+        return $this->hasMany(RiwayatPelacakan::class, 'alumni_id');
+    }
 }

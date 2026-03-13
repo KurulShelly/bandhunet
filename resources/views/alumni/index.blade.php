@@ -51,18 +51,25 @@ Belum Dilacak
 @elseif($a->status_pelacakan == "Teridentifikasi")
 
 <span style="background:#28a745;color:white;padding:5px 10px;border-radius:20px;font-size:12px;">
-Terdeteksi
+Teridentifikasi
 </span>
 
-@else
+@elseif($a->status_pelacakan == "Perlu Verifikasi")
 
 <span style="background:#ffc107;color:black;padding:5px 10px;border-radius:20px;font-size:12px;">
 Perlu Verifikasi
 </span>
 
+@elseif($a->status_pelacakan == "Tidak Ditemukan")
+
+<span style="background:#6c757d;color:white;padding:5px 10px;border-radius:20px;font-size:12px;">
+Tidak Ditemukan
+</span>
+
 @endif
 
 </td>
+
 
 <!-- Pencarian Akademik -->
 <td align="center">

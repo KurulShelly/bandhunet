@@ -18,11 +18,6 @@ class Alumni extends Model
         'status_pelacakan'
     ];
 
-    /*
-    |--------------------------------------------------------------------------
-    | Relasi ke Riwayat Pelacakan
-    |--------------------------------------------------------------------------
-    */
 
     public function riwayatPelacakan()
     {

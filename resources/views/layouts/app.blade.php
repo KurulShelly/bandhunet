@@ -73,9 +73,12 @@ body{
 <h2>BandhuNet</h2>
 
 <a href="/">Dashboard</a>
+
 <a href="/alumni">Data Alumni</a>
-<a href="#">Pelacakan Alumni</a>
-<a href="#">Statistik</a>
+
+<a href="/pelacakan">Pelacakan Alumni</a>
+
+<a href="/statistik">Statistik</a>
 
 </div>
 

@@ -8,6 +8,49 @@ use App\Models\RiwayatPelacakan;
 class PelacakanController extends Controller
 {
 
+    // ==========================
+    // DASHBOARD STATISTIK
+    // ==========================
+
+    public function statistik()
+    {
+
+        $total = Alumni::count();
+
+        $belum = Alumni::where('status_pelacakan','Belum Dilacak')->count();
+
+        $teridentifikasi = Alumni::where('status_pelacakan','Teridentifikasi')->count();
+
+        $verifikasi = Alumni::where('status_pelacakan','Perlu Verifikasi')->count();
+
+        $tidak_ditemukan = Alumni::where('status_pelacakan','Tidak Ditemukan')->count();
+
+
+        $prodi = Alumni::selectRaw('prodi, count(*) as total')
+                ->groupBy('prodi')
+                ->get();
+
+
+        $recent = Alumni::latest()->take(5)->get();
+
+
+        return view('statistik.index', compact(
+            'total',
+            'belum',
+            'teridentifikasi',
+            'verifikasi',
+            'tidak_ditemukan',
+            'prodi',
+            'recent'
+        ));
+    }
+
+
+
+    // ==========================
+    // PROSES PELACAKAN ALUMNI
+    // ==========================
+
     public function lacak($id)
     {
 
@@ -18,7 +61,6 @@ class PelacakanController extends Controller
         $query2 = $alumni->nama . " Informatika UMM";
         $query3 = $alumni->nama . " site:scholar.google.com";
         $query4 = $alumni->nama . " software engineer Malang";
-
 
 
 
@@ -68,10 +110,11 @@ class PelacakanController extends Controller
 
         foreach ($databaseInternet as $data) {
 
-            
+
             if ($data['universitas'] != "Universitas Muhammadiyah Malang") {
                 continue;
             }
+
 
             similar_text(
                 strtolower($alumni->nama),
@@ -81,12 +124,12 @@ class PelacakanController extends Controller
 
             $confidence = round($percent);
 
-            
+
             if ($confidence >= 50) {
 
                 $data['confidence'] = $confidence;
 
-                
+
                 if ($data['sumber'] == "LinkedIn") {
                     $data['query'] = $query1;
                 } elseif ($data['sumber'] == "Google Scholar") {
@@ -98,6 +141,7 @@ class PelacakanController extends Controller
                 $hasil[] = $data;
             }
         }
+
 
 
         if (empty($hasil)) {
@@ -114,7 +158,6 @@ class PelacakanController extends Controller
                 'hasil'
             ));
         }
-
 
 
 
@@ -137,6 +180,7 @@ class PelacakanController extends Controller
         }
 
 
+
         $maxScore = max(array_column($hasil, 'confidence'));
 
         if ($maxScore >= 80) {
@@ -154,6 +198,7 @@ class PelacakanController extends Controller
 
         $alumni->status_pelacakan = $status;
         $alumni->save();
+
 
 
         return view('pelacakan.hasil', compact(

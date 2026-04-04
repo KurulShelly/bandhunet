@@ -17,7 +17,7 @@ Aplikasi ini dikembangkan untuk membantu:
 
 ---
 
-## 🚀 Fitur Utama
+## Fitur Utama
 
 * 📄 Menampilkan data alumni
 * ➕ Menambahkan data alumni
@@ -36,51 +36,18 @@ Aplikasi ini dikembangkan untuk membantu:
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+##  Teknologi yang Digunakan
 
 * **Frontend** : HTML, CSS, JavaScript
 * **Backend** : PHP Native
 * **Database** : MySQL
-* **Server** : InfinityFree / Localhost (Laragon/XAMPP)
+* **Server** : InfinityFree / Localhost (Laragon)
 
 ---
 
-## ⚙️ Cara Menjalankan Aplikasi
+## Link Website
 
-### 1. Clone Repository
-
-```bash
-git clone https://github.com/username/bandhunet.git
-```
-
-### 2. Pindahkan ke Folder Server
-
-* Jika menggunakan XAMPP → `htdocs/`
-* Jika menggunakan Laragon → `www/`
-
-### 3. Import Database
-
-* Buka **phpMyAdmin**
-* Buat database baru (misal: `bandhunet`)
-* Import file `.sql` yang tersedia
-
-### 4. Konfigurasi Koneksi
-
-Edit file `koneksi.php`:
-
-```php
-$conn = mysqli_connect("localhost", "root", "", "bandhunet");
-```
-
-### 5. Jalankan Aplikasi
-
-Buka browser:
-
-```
-http://localhost/bandhunet
-```
-
----
+### https://bandhunet.kesug.com/dashboard.php
 
 ## 📂 Struktur Folder
 
@@ -102,11 +69,11 @@ bandhunet/
 
 ---
 
-## 🧪 Hasil Pengujian Aplikasi
+## Hasil Pengujian Aplikasi
 
 Pengujian dilakukan menggunakan metode **Black Box Testing** untuk memastikan sistem berjalan sesuai dengan kebutuhan.
 
-### 🎯 Aspek Kualitas yang Diuji
+### Aspek Kualitas yang Diuji
 
 * Fungsionalitas
 * Keandalan (Reliability)
@@ -116,7 +83,7 @@ Pengujian dilakukan menggunakan metode **Black Box Testing** untuk memastikan si
 
 ---
 
-### 📊 Tabel Hasil Pengujian
+### Tabel Hasil Pengujian
 
 | No | Fitur yang Diuji   | Skenario Pengujian          | Hasil yang Diharapkan | Hasil Aktual                                           | Status            |
 | -- | ------------------ | --------------------------- | --------------------- | ------------------------------------------------------ | ----------------- |
@@ -130,7 +97,7 @@ Pengujian dilakukan menggunakan metode **Black Box Testing** untuk memastikan si
 
 ---
 
-## 🧾 Pernyataan Hasil Pengujian
+## Pernyataan Hasil Pengujian
 
 Berdasarkan pengujian yang telah dilakukan:
 
@@ -140,6 +107,6 @@ Berdasarkan pengujian yang telah dilakukan:
 * Fitur **tracking alumni belum sepenuhnya optimal**.
 * Solusi sementara menggunakan **status tracking** untuk menandai kondisi data.
 
-## 📎 Lisensi
+## Lisensi
 
 Project ini dibuat untuk keperluan **tugas mata kuliah Rekayasa Kebutuhan**.

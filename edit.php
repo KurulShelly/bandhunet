@@ -118,7 +118,7 @@ if (isset($_POST['update'])) {
 
     <br><br>
     <button name="update" class="btn">💾 Simpan</button>
-    <a href="track.php?id=<?= $id ?>" class="btn" style="background:gray;">⬅ Kembali</a>
+    <a href="alumni.php ?>" class="btn" style="background:gray;">⬅ Kembali</a>
 </form>
 
 </div>
